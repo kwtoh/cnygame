@@ -7,12 +7,7 @@ var numbers = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 function game(id) {
 	start = turn(id);
-	if (start) {
-		if (!countup) {
-			countup = setInterval(setTime, 1000);
-		}
-	}
-	else {
+	if (!start) {
 		clearInterval(countup);
 	}
 
@@ -20,7 +15,7 @@ function game(id) {
 
 function setTime() {
 	++totalseconds;
-	document.getElementById("timer").innerHTML = totalseconds;
+	document.getElementById("timer-value").innerHTML = totalseconds;
 }
 
 function turn(id) {
@@ -56,15 +51,30 @@ function shakeCard(id) {
 	 })
 }
 
+function startCard(card, animal) {
+	card.classList.add('animated', 'flip');
+	card.addEventListener(
+		'animationend', 
+		function() { 
+			card.classList.remove('animated', 'flip');
+			card.id = animal;
+			card.innerHTML = retIcon(animal);
+	 })
+
+}
+
 function startGame() {
+
+	// start timer
+	start = true;
+	countup = setInterval(setTime, 1000);
+
+	// Shuffle the array
 	shuffle(numbers);
 	var elements = document.getElementsByClassName("card");
 	var i;
 	for (i = 0; i < elements.length; i++) {
-		var animal = zodiac[numbers[i]];
-		console.log(animal);
-		elements[i].id = animal;
-		elements[i].innerHTML = retIcon(animal);
+		startCard(elements[i], zodiac[numbers[i]]);
 	}
 }
 
