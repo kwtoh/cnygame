@@ -18,10 +18,11 @@ nav {
 
 .startbutton {
     font-size: 30px;
-    color: red;
+    background-color: red;
+    color: white;
     border: 0;
-    padding: 0;
-    background-color: inherit;
+    border-radius: 4px;
+    padding: 10px 35px;
     cursor: pointer;
 }
 
@@ -49,7 +50,7 @@ button {
     background-color: red;
 }
 
-.card:hover {
+.tilt:hover {
     -webkit-box-shadow:rgba(0,0,0,0.8) 0px 5px 15px, inset rgba(0,0,0,0.15) 0px -10px 20px;
     -moz-box-shadow:rgba(0,0,0,0.8) 0px 5px 15px, inset rgba(0,0,0,0.15) 0px -10px 20px;
     -o-box-shadow:rgba(0,0,0,0.8) 0px 5px 15px, inset rgba(0,0,0,0.15) 0px -10px 20px;

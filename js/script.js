@@ -144,6 +144,7 @@ function startGame() {
 	var elements = document.getElementsByClassName("card");
 	var i;
 	for (i = 0; i < elements.length; i++) {
+		elements[i].classList.add("tilt");
 		startCard(elements[i], zodiac[numbers[i]]);
 	}
 }
