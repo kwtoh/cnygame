@@ -1,6 +1,7 @@
 var countup = false;
 var start = false;
 var totalseconds = 0;
+var numbers = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 var zodiac = [
 	{	
@@ -41,7 +42,7 @@ var zodiac = [
 	},
 	{
 		m_id : 'chicken',
-		m_icon : '🐔'
+		m_icon : '🐓'
 	},
 	{
 		m_id : 'dog',
@@ -53,7 +54,6 @@ var zodiac = [
 	}
 ];
 
-var numbers = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 function game(id) {
 	start = turn(id);
@@ -73,9 +73,7 @@ function setTime() {
 }
 
 function turn(id) {
-
 	console.log("game turn");
-
 	var card = document.getElementById(id);
 
 	if (card.innerHTML === "🍊")
