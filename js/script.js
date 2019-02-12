@@ -61,8 +61,9 @@ function game(id) {
 	if (!start) {
 		clearInterval(countup);
 		alert("Congratulations! You took " + totalseconds + " seconds.");
-		document.getElementsByClassName("party-popper").css("display", "");
-		partyPopper('.party-popper', true);
+		location.reload();
+		//document.getElementsByClassName("party-popper").css("display", "");
+		//partyPopper('.party-popper', true);
 	}
 }
 
