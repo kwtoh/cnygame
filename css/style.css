@@ -4,16 +4,27 @@ body {
 }
 
 nav {
+    display: flex;
     background-color: #e87e04;
     padding: 20px;
+
 }
 
 .timer {
     margin-left: auto;
 }
 
+button {
+    font-size: 100%;
+    font-family: inherit;
+    border: 0;
+    padding: 0;
+    background-color: inherit;
+    cursor: pointer;
+}
+
 .container {
-    margin: 5%;
+    margin: 2%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -120,4 +131,22 @@ nav {
     background: -ms-linear-gradient(top, #f6e6b4 0%,#ed9017 100%); /* IE10+ */
     background: linear-gradient(top, #f6e6b4 0%,#ed9017 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6e6b4', endColorstr='#ed9017',GradientType=0 ); /* IE6-9 */
+}
+
+/*******************************
+PARTY POPPER
+*******************************/
+.party-popper {
+  position: absolute;
+  top: 80%;
+  left: 20%;
+}
+.party-popper__emoji {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 2em;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+  z-index: 1;
 }

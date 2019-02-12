@@ -2,15 +2,68 @@ var countup = false;
 var start = false;
 var totalseconds = 0;
 
-var zodiac = ['mouse', 'cow', 'tiger', 'rabbit', 'dragon', 'snake', 'horse', 'sheep', 'monkey', 'chicken', 'dog', 'pig'];
+var zodiac = [
+	{	
+		m_id :'mouse',
+		m_icon : '🐁'
+	},
+	{
+		m_id : 'cow',
+		m_icon : '🐄' 
+	},
+	{
+		m_id : 'tiger',
+		m_icon : '🐅'
+	},
+	{
+		m_id : 'rabbit',
+		m_icon : '🐇'
+	},
+	{
+		m_id : 'dragon',
+		m_icon : '🐉'
+	},
+	{
+		m_id : 'snake',
+		m_icon : '🐍'
+	},
+	{
+		m_id : 'horse',
+		m_icon : '🐎'
+	},
+	{
+		m_id : 'sheep',
+		m_icon : '🐏'
+	},
+	{
+		m_id : 'monkey',
+		m_icon : '🐒'
+	},
+	{
+		m_id : 'chicken',
+		m_icon : '🐔'
+	},
+	{
+		m_id : 'dog',
+		m_icon : '🐕'
+	},
+	{
+		m_id : 'pig',
+		m_icon : '🐖'
+	}
+];
+
 var numbers = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 function game(id) {
 	start = turn(id);
+	console.log(start);
 	if (!start) {
 		clearInterval(countup);
+		console.log('game end');
+		document.getElementsByClassName("party-popper").css("display", "");
+		partyPopper('.party-popper', true);
 	}
-
 }
 
 function setTime() {
@@ -21,12 +74,22 @@ function setTime() {
 function turn(id) {
 
 	console.log("game turn");
-	if (id === zodiac[0]) {
-		document.getElementById(id).innerHTML = "🍊";
+
+	var card = document.getElementById(id);
+
+	if (card.innerHTML === "🍊")
+	{
+		return start;
+	}
+
+	if (id === zodiac[0].m_id) {
+		card.innerHTML = "🍊";
+		card.id = "";
 		zodiac.shift();
 	}
 	else {
 		shakeCard(id);
+		return start;
 	}
 
 	var elements = document.getElementsByClassName("card");
@@ -52,18 +115,21 @@ function shakeCard(id) {
 }
 
 function startCard(card, animal) {
+	console.log("start card");
 	card.classList.add('animated', 'flip');
 	card.addEventListener(
 		'animationend', 
 		function() { 
 			card.classList.remove('animated', 'flip');
-			card.id = animal;
-			card.innerHTML = retIcon(animal);
+			card.id = animal.m_id;
+			card.innerHTML = animal.m_icon;
 	 })
 
 }
 
 function startGame() {
+
+	console.log("start game");
 
 	// start timer
 	start = true;
@@ -83,32 +149,115 @@ function shuffle(o) {
     return o;
 }
 
-function retIcon(animal) {
-	console.log(animal);
-	switch (animal) {
-		case "mouse": 
-			return "🐁";
-		case "cow": 
-			return "🐄";
-		case "tiger": 
-			return "🐅";
-		case "rabbit": 
-			return "🐇";
-		case "dragon": 
-			return "🐉";
-		case "snake": 
-			return "🐍";
-		case "horse": 
-			return "🐎";
-		case "sheep": 
-			return "🐏";
-		case "monkey": 
-			return "🐒";
-		case "chicken": 
-			return "🐔";
-		case "dog": 
-			return "🐕";
-		case "pig": 
-			return "🐖";
+/***************************
+PARTY POPPER
+***************************/
+/**
+ * Creates a Mo.js party popper animation.
+ *
+ * @property {string}  selector - DOM selector to attach the animation to
+ * @property {boolean} [debug]  - If enabled, add a debug timeline
+ */
+
+function partyPopper(selector, debug) {
+	const colors = [
+		'#bea4ff',
+		'#feb535',
+		'#ff6e83',
+		'#58cafe',
+	]
+
+	const flight = {
+		isSwirl: true,
+		swirlSize: 'rand(10, 20)',
+		swirlFrequency: 'rand(1, 3)',
+		direction: [-1, 1],
+		degreeShift: 'rand(-15, 15)',
+		duration: 1200,
+		easing: 'cubic.out',
+		pathScale: 'stagger(.2)',
 	}
-}
+
+	// Confetti shapes
+	const torsade = {
+		shape: 'zigzag',
+		points: 'rand(4, 6)',
+		radius: 40,
+		radiusY: 30,
+		strokeLinecap: 'round',
+		strokeWidth: 8,
+		fill: 'none',
+		stroke: colors,
+		angle: {0: 'rand(-720, 720)'},
+		...flight,
+	}
+
+	const bent = {
+		shape: 'curve',
+		radius: 'rand(25, 35)',
+		radiusY: 15,
+		strokeLinecap: 'round',
+		strokeWidth: 8,
+		fill: 'none',
+		stroke: colors,
+		angle: {0: 'rand(-720, 720)'},
+		...flight,
+	}
+
+	const flake = {
+		shape:'circle',
+		radius: 'rand(5, 10)',
+		fill: colors,
+		...flight,
+	}
+
+	// Bursts
+	const burst = {
+		parent: selector,
+		radius: {0 : 'rand(50, 100)'},
+		count: 'rand(18, 22)',
+		degree: 30,
+	}
+
+	const torsadeBurst = new mojs.Burst({
+		...burst,
+		children: {
+			...torsade,
+		}
+	});
+
+	const bentBurst = new mojs.Burst({
+		...burst,
+		children: {
+			...bent,
+		}
+	});
+
+	const flakeBurst = new mojs.Burst({
+		...burst,
+		children: {
+			...flake,
+		}
+	});
+
+	// Timeline (debug only)
+	if (debug != null) {
+		const timeline = new mojs.Timeline;
+
+		timeline.add(
+			torsadeBurst, 
+			bentBurst, 
+			flakeBurst,
+		);
+
+		new MojsPlayer({
+			add: timeline,
+			isPlaying: true,
+			isRepeat: true,
+		});	
+	} else {
+		torsadeBurst.play()
+		bentBurst.play()
+		flakeBurst.play()
+	}
+};
