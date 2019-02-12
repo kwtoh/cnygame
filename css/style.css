@@ -5,8 +5,10 @@ body {
 
 nav {
     display: flex;
-    background-color: #e87e04;
+    background-color: inherit;
     padding: 20px;
+    font-size: 30px;
+    color: #F5F5F5;
 
 }
 
@@ -14,9 +16,9 @@ nav {
     margin-left: auto;
 }
 
-button {
-    font-size: 100%;
-    font-family: inherit;
+.startbutton {
+    font-size: 30px;
+    color: #F5F5F5;
     border: 0;
     padding: 0;
     background-color: inherit;
@@ -149,4 +151,8 @@ PARTY POPPER
   -webkit-transform: translate(-50%);
           transform: translate(-50%);
   z-index: 1;
+}
+
+.startbutton {
+    font-size: ;
 }
