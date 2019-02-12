@@ -1,5 +1,5 @@
 body {
-    background-color: #d91e18;
+    background-color: #f7f7f7;
     margin: 0;
 }
 
@@ -8,7 +8,7 @@ nav {
     background-color: inherit;
     padding: 20px;
     font-size: 30px;
-    color: #F5F5F5;
+    color: red;
 
 }
 
@@ -18,7 +18,7 @@ nav {
 
 .startbutton {
     font-size: 30px;
-    color: #F5F5F5;
+    color: red;
     border: 0;
     padding: 0;
     background-color: inherit;
@@ -41,6 +41,12 @@ nav {
     border-radius:4px;
     border:3px solid #e87e04;
     transition: all 0.3s linear;
+}
+
+button {
+    padding: 10px 25px;
+    border-radius: 3px;
+    background-color: red;
 }
 
 .card:hover {
