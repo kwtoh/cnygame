@@ -60,7 +60,7 @@ function game(id) {
 	console.log(start);
 	if (!start) {
 		clearInterval(countup);
-		console.log('game end');
+		alert("Congratulations! You took " + totalseconds + " seconds.");
 		document.getElementsByClassName("party-popper").css("display", "");
 		partyPopper('.party-popper', true);
 	}
@@ -115,15 +115,18 @@ function shakeCard(id) {
 }
 
 function startCard(card, animal) {
-	console.log("start card");
-	card.classList.add('animated', 'flip');
-	card.addEventListener(
-		'animationend', 
-		function() { 
-			card.classList.remove('animated', 'flip');
-			card.id = animal.m_id;
-			card.innerHTML = animal.m_icon;
-	 })
+
+	card.id = animal.m_id;
+	card.innerHTML = animal.m_icon;
+
+	// console.log("start card");
+	// card.classList.add('animated', 'flip');
+	// card.addEventListener(
+	// 	'animationend', 
+	// 	function() { 
+	// 		card.classList.remove('animated', 'flip');
+			
+	//  })
 
 }
 
