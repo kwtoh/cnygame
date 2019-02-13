@@ -72,21 +72,3 @@ button {
     background: -ms-linear-gradient(top, #C655BE 0%,#cf0404 100%); /* IE10+ */
     background: linear-gradient(top, #C655BE 0%,#cf0404 100%); /* W3C */
 }
-
-/*******************************
-PARTY POPPER
-*******************************/
-.party-popper {
-  position: absolute;
-  top: 80%;
-  left: 20%;
-}
-.party-popper__emoji {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 2em;
-  -webkit-transform: translate(-50%);
-          transform: translate(-50%);
-  z-index: 1;
-}
