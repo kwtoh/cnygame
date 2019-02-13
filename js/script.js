@@ -56,7 +56,7 @@ const zodiac = [
 
 
 // Start Game Button
-let startGame = () => {
+const startGame = () => {
 	// start timer
 	start = true;
 	countup = setInterval(setTime, 1000);
@@ -69,13 +69,13 @@ let startGame = () => {
 	}
 }
 
-let startCard = (card, animal) => {
+const startCard = (card, animal) => {
 	card.id = animal.m_id;
 	card.textContent = animal.m_icon;
 }
 
 // Every Card Turn
-let game = (id) => {
+const game = (id) => {
 	// Flip the card and check if game ended
 	start = turn(id);
 	
@@ -87,12 +87,12 @@ let game = (id) => {
 	}
 }
 
-let setTime = () => {
+const setTime = () => {
 	++totalseconds;
 	document.querySelector("#timer-value").textContent = totalseconds;
 }
 
-let turn = (id) => {
+const turn = (id) => {
 	let card = document.getElementById(id);
 	if (card.textContent === "🍊")
 	{
@@ -118,18 +118,19 @@ let turn = (id) => {
 	return false;
 }
 
-let shakeCard = (id) => {
+const shakeCard = (id) => {
 	let card = document.getElementById(id);
 	card.classList.add('animated', 'shake');
 
 	card.addEventListener(
 		'animationend', 
-		function() { 
+		() => {
 			card.classList.remove('animated', 'shake');
-	 })
+		}
+	)
 }
 
-let shuffle = (o) => {
+const shuffle = (o) => {
 	for(let j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
 }
