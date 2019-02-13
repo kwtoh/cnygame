@@ -1,9 +1,9 @@
-var countup = false;
-var start = false;
-var totalseconds = 0;
-var cards = document.getElementsByClassName("card");
-var numbers = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-var zodiac = [
+let countup = false;
+let start = false;
+let totalseconds = 0;
+let cards = document.getElementsByClassName("card");
+let numbers = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+const zodiac = [
 	{	
 		m_id :'mouse',
 		m_icon : '🐁'
@@ -56,7 +56,7 @@ var zodiac = [
 
 
 // Start Game Button
-function startGame() {
+let startGame = () => {
 	// start timer
 	start = true;
 	countup = setInterval(setTime, 1000);
@@ -64,40 +64,36 @@ function startGame() {
 	// Shuffle the array
 	shuffle(numbers);
 
-	for (var i = 0; i < cards.length; i++) {
+	for (let i = 0; i < cards.length; i++) {
 		startCard(cards[i], zodiac[numbers[i]]);
 	}
 }
 
-function startCard(card, animal) {
+let startCard = (card, animal) => {
 	card.id = animal.m_id;
 	card.textContent = animal.m_icon;
 }
 
 // Every Card Turn
-function game(id) {
-	
+let game = (id) => {
 	// Flip the card and check if game ended
 	start = turn(id);
 	
 	if (!start) {
 		clearInterval(countup);
-		alert("Congratulations! You took " + totalseconds + " seconds.");
+		const complete = `Congratulations! You took ${totalseconds} seconds.`;
+		alert(complete);
 		location.reload();
 	}
 }
 
-function setTime() {
+let setTime = () => {
 	++totalseconds;
-	document.getElementById("timer-value").textContent = totalseconds;
+	document.querySelector("#timer-value").textContent = totalseconds;
 }
 
-function turn(id) {
-
-	console.log("game turn");
-
-	var card = document.getElementById(id);
-
+let turn = (id) => {
+	let card = document.getElementById(id);
 	if (card.textContent === "🍊")
 	{
 		return start;
@@ -113,7 +109,7 @@ function turn(id) {
 		return start;
 	}
 
-	for (var i = 0; i < cards.length; i++) {
+	for (let i = 0; i < cards.length; i++) {
 		if (cards[i].textContent !== "🍊") {
 			return true;
 		}
@@ -122,8 +118,8 @@ function turn(id) {
 	return false;
 }
 
-function shakeCard(id) {
-	var card = document.getElementById(id);
+let shakeCard = (id) => {
+	let card = document.getElementById(id);
 	card.classList.add('animated', 'shake');
 
 	card.addEventListener(
@@ -133,7 +129,7 @@ function shakeCard(id) {
 	 })
 }
 
-function shuffle(o) {
-	for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+let shuffle = (o) => {
+	for(let j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
 }
