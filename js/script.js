@@ -1,7 +1,6 @@
 var countup = false;
 var start = false;
 var totalseconds = 0;
-var numbers = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 var zodiac = [
 	{	
@@ -42,7 +41,7 @@ var zodiac = [
 	},
 	{
 		m_id : 'chicken',
-		m_icon : '🐓'
+		m_icon : '🐔'
 	},
 	{
 		m_id : 'dog',
@@ -54,36 +53,60 @@ var zodiac = [
 	}
 ];
 
+var numbers = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
+// Start Game Button
+function startGame() {
+	// start timer
+	start = true;
+	countup = setInterval(setTime, 1000);
+
+	// Shuffle the array
+	shuffle(numbers);
+
+	var elements = document.getElementsByClassName("card");
+	for (var i = 0; i < elements.length; i++) {
+		startCard(elements[i], zodiac[numbers[i]]);
+	}
+}
+
+function startCard(card, animal) {
+	card.id = animal.m_id;
+	card.textContent = animal.m_icon;
+}
+
+// Every Card Turn
 function game(id) {
+	
+	// Flip the card and check if game ended
 	start = turn(id);
-	console.log(start);
+	
 	if (!start) {
 		clearInterval(countup);
 		alert("Congratulations! You took " + totalseconds + " seconds.");
 		location.reload();
-		//document.getElementsByClassName("party-popper").css("display", "");
-		//partyPopper('.party-popper', true);
 	}
 }
 
 function setTime() {
 	++totalseconds;
-	document.getElementById("timer-value").innerHTML = totalseconds;
+	document.getElementById("timer-value").textContent = totalseconds;
 }
 
 function turn(id) {
+
 	console.log("game turn");
+
 	var card = document.getElementById(id);
 
-	if (card.innerHTML === "🍊")
+	if (card.textContent === "🍊")
 	{
 		return start;
 	}
 
 	if (id === zodiac[0].m_id) {
-		card.innerHTML = "🍊";
-		card.id = "";
+		card.textContent = "🍊";
+		card.removeAttribute("id");
 		zodiac.shift();
 	}
 	else {
@@ -92,9 +115,8 @@ function turn(id) {
 	}
 
 	var elements = document.getElementsByClassName("card");
-	var i;
-	for (i = 0; i < elements.length; i++) {
-		if (elements[i].innerHTML !== "🍊") {
+	for (var i = 0; i < elements.length; i++) {
+		if (elements[i].textContent !== "🍊") {
 			return true;
 		}
 	}
@@ -111,40 +133,6 @@ function shakeCard(id) {
 		function() { 
 			card.classList.remove('animated', 'shake');
 	 })
-}
-
-function startCard(card, animal) {
-
-	card.id = animal.m_id;
-	card.innerHTML = animal.m_icon;
-
-	// console.log("start card");
-	// card.classList.add('animated', 'flip');
-	// card.addEventListener(
-	// 	'animationend', 
-	// 	function() { 
-	// 		card.classList.remove('animated', 'flip');
-			
-	//  })
-
-}
-
-function startGame() {
-
-	console.log("start game");
-
-	// start timer
-	start = true;
-	countup = setInterval(setTime, 1000);
-
-	// Shuffle the array
-	shuffle(numbers);
-	var elements = document.getElementsByClassName("card");
-	var i;
-	for (i = 0; i < elements.length; i++) {
-		elements[i].classList.add("tilt");
-		startCard(elements[i], zodiac[numbers[i]]);
-	}
 }
 
 function shuffle(o) {
